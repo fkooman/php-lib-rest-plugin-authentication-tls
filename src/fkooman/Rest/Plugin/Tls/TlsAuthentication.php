@@ -30,6 +30,14 @@ class TlsAuthentication implements ServicePluginInterface
     {
         $certData = $request->getHeader('SSL_CLIENT_CERT');
         if (null === $certData || !is_string($certData) || 0 >= strlen($certData)) {
+            // there does not seem to be an attempt to authenticate
+            if (array_key_exists('requireAuth', $routeConfig)) {
+                // if authentication is optional let it go...
+                if (!$routeConfig['requireAuth']) {
+                    return false;
+                }
+            }
+
             throw new ForbiddenException('TLS client certificate missing in request');
         }
 

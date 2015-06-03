@@ -121,6 +121,44 @@ T9sYz50XBzbpXbiWef2d0RMnCi6k+oiuBZBBz630kSU6jpi1a8iyavTT8jEA
             )
         );
         $auth = new TlsAuthentication();
-        $this->assertFalse($auth->execute($request, array()));
+        $auth->execute($request, array());
+    }
+
+    /**
+     * @expectedException fkooman\Http\Exception\BadRequestException
+     * @expectedExceptionMessage OpenSSL was unable to parse the certificate
+     */
+    public function testAttemptWhileNotRequired()
+    {
+        $request = new Request(
+            array(
+                'SERVER_NAME' => 'www.example.org',
+                'SERVER_PORT' => 80,
+                'QUERY_STRING' => '',
+                'REQUEST_URI' => '/',
+                'SCRIPT_NAME' => '/index.php',
+                'REQUEST_METHOD' => 'GET',
+                'SSL_CLIENT_CERT' => 'Not A+/\ Certificate',
+            )
+        );
+        $auth = new TlsAuthentication();
+        $auth->execute($request, array('requireAuth' => false));
+    }
+
+    public function testNotRequired()
+    {
+        $request = new Request(
+            array(
+                'SERVER_NAME' => 'www.example.org',
+                'SERVER_PORT' => 80,
+                'QUERY_STRING' => '',
+                'REQUEST_URI' => '/',
+                'SCRIPT_NAME' => '/index.php',
+                'REQUEST_METHOD' => 'GET',
+                'SSL_CLIENT_CERT' => '',
+            )
+        );
+        $auth = new TlsAuthentication();
+        $this->assertFalse($auth->execute($request, array('requireAuth' => false)));
     }
 }
