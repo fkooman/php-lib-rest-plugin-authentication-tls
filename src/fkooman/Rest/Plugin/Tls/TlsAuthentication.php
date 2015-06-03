@@ -34,7 +34,7 @@ class TlsAuthentication implements ServicePluginInterface
         }
 
         try {
-            $certParser = CertParser::fromEncodedDer($certData);
+            $certParser = CertParser::fromPem($certData);
 
             return $certParser;
         } catch (Exception $e) {
