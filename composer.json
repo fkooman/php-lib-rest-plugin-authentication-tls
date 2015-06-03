@@ -1,0 +1,22 @@
+{
+    "authors": [
+        {
+            "email": "fkooman@tuxed.net",
+            "name": "Fran\u00e7ois Kooman",
+            "role": "Developer"
+        }
+    ],
+    "autoload": {
+        "psr-0": {
+            "fkooman\\Rest\\Plugin\\Tls": "src/"
+        }
+    },
+    "description": "TLS Client Certificate Authentication plugin for fkooman/rest",
+    "license": "Apache-2.0",
+    "name": "fkooman/rest-plugin-tls",
+    "require": {
+        "fkooman/cert-parser": "dev-master",
+        "fkooman/rest": "dev-develop",
+        "php": ">=5.3.3"
+    }
+}

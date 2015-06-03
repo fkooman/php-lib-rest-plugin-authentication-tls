@@ -1,0 +1,152 @@
+{
+    "_readme": [
+        "This file locks the dependencies of your project to a known state",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
+        "This file is @generated automatically"
+    ],
+    "hash": "79d65ecd61b17570e7b620cf9db43d71",
+    "packages": [
+        {
+            "name": "fkooman/cert-parser",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/fkooman/php-cert-parser.git",
+                "reference": "56e01f154156400a9d59886dd33902f96155012f"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/fkooman/php-cert-parser/zipball/56e01f154156400a9d59886dd33902f96155012f",
+                "reference": "56e01f154156400a9d59886dd33902f96155012f",
+                "shasum": ""
+            },
+            "require": {
+                "ext-openssl": "*",
+                "php": ">=5.3.3"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "fkooman\\X509": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "Apache-2.0"
+            ],
+            "authors": [
+                {
+                    "name": "François Kooman",
+                    "email": "fkooman@tuxed.net",
+                    "role": "Developer"
+                },
+                {
+                    "name": "Ulrich Kautz",
+                    "email": "uk@fortrabbit.com",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Simple OpenSSL based X.509 certificate parser",
+            "time": "2015-06-03 10:21:12"
+        },
+        {
+            "name": "fkooman/json",
+            "version": "0.6.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/fkooman/php-lib-json.git",
+                "reference": "556209cf34cdf55f90eefffd778f93a3e9d5bb2d"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/fkooman/php-lib-json/zipball/556209cf34cdf55f90eefffd778f93a3e9d5bb2d",
+                "reference": "556209cf34cdf55f90eefffd778f93a3e9d5bb2d",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.3"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "fkooman\\Json": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "Apache-2.0"
+            ],
+            "authors": [
+                {
+                    "name": "François Kooman",
+                    "email": "fkooman@tuxed.net",
+                    "role": "Developer"
+                }
+            ],
+            "description": "PHP library to encode and decode JSON",
+            "time": "2014-10-22 12:49:20"
+        },
+        {
+            "name": "fkooman/rest",
+            "version": "dev-develop",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/fkooman/php-lib-rest.git",
+                "reference": "e33d95bee053b4e341b28365a8a3532dd8b085e1"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/fkooman/php-lib-rest/zipball/e33d95bee053b4e341b28365a8a3532dd8b085e1",
+                "reference": "e33d95bee053b4e341b28365a8a3532dd8b085e1",
+                "shasum": ""
+            },
+            "require": {
+                "fkooman/json": "~0.6.0",
+                "php": ">=5.3.3"
+            },
+            "require-dev": {
+                "ext-xdebug": "*"
+            },
+            "suggest": {
+                "fkooman/rest-plugin-basic": "Basic Authentication plugin",
+                "fkooman/rest-plugin-bearer": "Bearer (OAuth) Authentication plugin",
+                "fkooman/rest-plugin-indieauth": "IndieAuth Authentication plugin",
+                "fkooman/rest-plugin-mellon": "Mellon (SAML) Authentication plugin",
+                "fkooman/rest-plugin-simplesaml": "simpleSAMLphp (SAML) Authentication plugin"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "fkooman\\Http": "src/",
+                    "fkooman\\Rest": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "Apache-2.0"
+            ],
+            "authors": [
+                {
+                    "name": "François Kooman",
+                    "email": "fkooman@tuxed.net",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Simple PHP library for writing REST services.",
+            "time": "2015-06-01 22:01:42"
+        }
+    ],
+    "packages-dev": [],
+    "aliases": [],
+    "minimum-stability": "stable",
+    "stability-flags": {
+        "fkooman/cert-parser": 20,
+        "fkooman/rest": 20
+    },
+    "prefer-stable": false,
+    "prefer-lowest": false,
+    "platform": {
+        "php": ">=5.3.3"
+    },
+    "platform-dev": []
+}
