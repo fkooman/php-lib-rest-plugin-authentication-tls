@@ -15,25 +15,24 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-require_once dirname(__DIR__).'/vendor/autoload.php';
 
-use fkooman\Rest\Service;
-use fkooman\Rest\PluginRegistry;
-use fkooman\Rest\Plugin\Tls\TlsAuthentication;
-use fkooman\Rest\Plugin\Tls\CertInfo;
+namespace fkooman\Rest\Plugin\Tls;
 
-$service = new Service();
-$pluginRegistry = new PluginRegistry();
-$pluginRegistry->registerDefaultPlugin(
-    new TlsAuthentication()
-);
-$service->setPluginRegistry($pluginRegistry);
+use fkooman\Rest\Plugin\Authentication\UserInfoInterface;
+use fkooman\X509\CertParser;
 
-$service->get(
-    '/getMyUserId',
-    function (CertInfo $certInfo) {
-        return sprintf('Hello %s', $certInfo->getUserId());
+class CertInfo implements UserInfoInterface
+{
+    /** @var \fkooman\X509\CertParser */
+    private $certParser;
+
+    public function __construct(CertParser $certParser)
+    {
+        $this->certParser = $certParser;
     }
-);
 
-$service->run()->send();
+    public function getUserId()
+    {
+        return $this->certParser->getFingerprint('sha256', true);
+    }
+}

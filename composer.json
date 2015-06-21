@@ -8,7 +8,7 @@
     ],
     "autoload": {
         "psr-0": {
-            "fkooman\\Rest\\Plugin\\Tls": "src/"
+            "fkooman\\Rest\\Plugin\\Tls\\": "src/"
         }
     },
     "description": "TLS Client Certificate Authentication plugin for fkooman/rest",
@@ -16,7 +16,7 @@
     "name": "fkooman/rest-plugin-tls",
     "require": {
         "fkooman/cert-parser": "dev-master",
-        "fkooman/rest": "dev-develop",
+        "fkooman/rest": "dev-master",
         "php": ">=5.3.3"
     }
 }

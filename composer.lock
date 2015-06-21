@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "79d65ecd61b17570e7b620cf9db43d71",
+    "hash": "70f3f884e0408abb6029034806cc0ec9",
     "packages": [
         {
             "name": "fkooman/cert-parser",
@@ -88,24 +88,22 @@
         },
         {
             "name": "fkooman/rest",
-            "version": "dev-develop",
+            "version": "dev-master",
             "source": {
                 "type": "git",
                 "url": "https://github.com/fkooman/php-lib-rest.git",
-                "reference": "b5bc2423fdbfddc582cd9aad914b3c97171a9ee7"
+                "reference": "077f270ae35052e81254bd2aa7638b0294946b6a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/fkooman/php-lib-rest/zipball/b5bc2423fdbfddc582cd9aad914b3c97171a9ee7",
-                "reference": "b5bc2423fdbfddc582cd9aad914b3c97171a9ee7",
+                "url": "https://api.github.com/repos/fkooman/php-lib-rest/zipball/077f270ae35052e81254bd2aa7638b0294946b6a",
+                "reference": "077f270ae35052e81254bd2aa7638b0294946b6a",
                 "shasum": ""
             },
             "require": {
+                "ext-mbstring": "*",
                 "fkooman/json": "~0.6.0",
                 "php": ">=5.3.3"
-            },
-            "require-dev": {
-                "ext-xdebug": "*"
             },
             "suggest": {
                 "fkooman/rest-plugin-basic": "Basic Authentication plugin",
@@ -117,8 +115,8 @@
             "type": "library",
             "autoload": {
                 "psr-0": {
-                    "fkooman\\Http": "src/",
-                    "fkooman\\Rest": "src/"
+                    "fkooman\\Http\\": "src/",
+                    "fkooman\\Rest\\": "src/"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -133,7 +131,7 @@
                 }
             ],
             "description": "Simple PHP library for writing REST services.",
-            "time": "2015-06-04 09:53:49"
+            "time": "2015-06-21 10:12:38"
         }
     ],
     "packages-dev": [],

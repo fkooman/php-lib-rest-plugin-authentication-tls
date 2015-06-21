@@ -15,6 +15,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 namespace fkooman\Rest\Plugin\Tls;
 
 use fkooman\Http\Request;
@@ -57,14 +58,13 @@ T9sYz50XBzbpXbiWef2d0RMnCi6k+oiuBZBBz630kSU6jpi1a8iyavTT8jEA
             )
         );
         $auth = new TlsAuthentication();
-        $certParser = $auth->execute($request, array());
-        $this->assertEquals('__e3IYuUIKu_reNjy8ZHZ2PBh_H11eM5Rqs_KzxiHGg', $certParser->getFingerprint('sha256', true));
-        $this->assertEquals('/CN=03dd6bad498785b87fbfd491fd349fff', $certParser->getName());
+        $certInfo = $auth->execute($request, array());
+        $this->assertEquals('__e3IYuUIKu_reNjy8ZHZ2PBh_H11eM5Rqs_KzxiHGg', $certInfo->getUserId());
     }
 
     /**
-     * @expectedException fkooman\Http\Exception\ForbiddenException
-     * @expectedExceptionMessage TLS client certificate missing
+     * @expectedException fkooman\Http\Exception\UnauthorizedException
+     * @expectedExceptionMessage no_credentials
      */
     public function testTlsAuthNoCert()
     {
@@ -83,8 +83,8 @@ T9sYz50XBzbpXbiWef2d0RMnCi6k+oiuBZBBz630kSU6jpi1a8iyavTT8jEA
     }
 
     /**
-     * @expectedException fkooman\Http\Exception\ForbiddenException
-     * @expectedExceptionMessage TLS client certificate missing
+     * @expectedException fkooman\Http\Exception\UnauthorizedException
+     * @expectedExceptionMessage no_credentials
      */
     public function testTlsEmptyCert()
     {
@@ -100,7 +100,7 @@ T9sYz50XBzbpXbiWef2d0RMnCi6k+oiuBZBBz630kSU6jpi1a8iyavTT8jEA
             )
         );
         $auth = new TlsAuthentication();
-        $this->assertFalse($auth->execute($request, array()));
+        $auth->execute($request, array());
     }
 
     /**
@@ -159,6 +159,6 @@ T9sYz50XBzbpXbiWef2d0RMnCi6k+oiuBZBBz630kSU6jpi1a8iyavTT8jEA
             )
         );
         $auth = new TlsAuthentication();
-        $this->assertFalse($auth->execute($request, array('requireAuth' => false)));
+        $this->assertNull($auth->execute($request, array('requireAuth' => false)));
     }
 }

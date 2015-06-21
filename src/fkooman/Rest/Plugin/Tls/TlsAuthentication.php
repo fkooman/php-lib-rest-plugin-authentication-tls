@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Copyright 2014 François Kooman <fkooman@tuxed.net>.
+ * Copyright 2015 François Kooman <fkooman@tuxed.net>.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,39 +15,70 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 namespace fkooman\Rest\Plugin\Tls;
 
 use fkooman\X509\CertParser;
 use fkooman\Http\Request;
-use fkooman\Rest\ServicePluginInterface;
-use fkooman\Http\Exception\ForbiddenException;
+use fkooman\Rest\Plugin\Authentication\AuthenticationPluginInterface;
+use fkooman\Http\Exception\UnauthorizedException;
 use fkooman\Http\Exception\BadRequestException;
 use Exception;
 
-class TlsAuthentication implements ServicePluginInterface
+class TlsAuthentication implements AuthenticationPluginInterface
 {
-    public function execute(Request $request, array $routeConfig)
+    /** @var array */
+    private $authParams;
+
+    public function __construct(array $authParams = array())
+    {
+        $this->authParams = $authParams;
+    }
+
+    public function getScheme()
+    {
+        return 'TLS';
+    }
+
+    public function getAuthParams()
+    {
+        return $this->authParams;
+    }
+
+    public function isAttempt(Request $request)
     {
         $certData = $request->getHeader('SSL_CLIENT_CERT');
-        if (null === $certData || !is_string($certData) || 0 >= strlen($certData)) {
-            // there does not seem to be an attempt to authenticate
-            if (array_key_exists('requireAuth', $routeConfig)) {
-                // if authentication is optional let it go...
-                if (!$routeConfig['requireAuth']) {
-                    return false;
-                }
+
+        return null !== $certData && 0 !== strlen($certData);
+    }
+
+    public function execute(Request $request, array $routeConfig)
+    {
+        if ($this->isAttempt($request)) {
+            try {
+                $certData = $request->getHeader('SSL_CLIENT_CERT');
+
+                return new CertInfo(CertParser::fromPem($certData));
+            } catch (Exception $e) {
+                // something went wrong with parsing the certificate...
+                throw new BadRequestException($e->getMessage());
             }
-
-            throw new ForbiddenException('TLS client certificate missing in request');
         }
 
-        try {
-            $certParser = CertParser::fromPem($certData);
-
-            return $certParser;
-        } catch (Exception $e) {
-            // something went wrong with parsing the certificate...
-            throw new BadRequestException($e->getMessage());
+        // no attempt
+        if (array_key_exists('requireAuth', $routeConfig)) {
+            if (!$routeConfig['requireAuth']) {
+                // no authentication required
+                return;
+            }
         }
+
+        // no attempt, but authentication required
+        $e = new UnauthorizedException(
+            'no_credentials',
+            'TLS client certificate missing in request'
+        );
+        $e->addScheme('TLS', $this->authParams);
+        throw $e;
     }
 }
