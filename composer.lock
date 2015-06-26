@@ -4,20 +4,20 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "70f3f884e0408abb6029034806cc0ec9",
+    "hash": "1c5cfc8842d552344a23784c455b5bee",
     "packages": [
         {
             "name": "fkooman/cert-parser",
-            "version": "dev-master",
+            "version": "0.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/fkooman/php-cert-parser.git",
-                "reference": "56e01f154156400a9d59886dd33902f96155012f"
+                "reference": "d05eb0ab457dd152a5af69903e14ec52e0563e20"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/fkooman/php-cert-parser/zipball/56e01f154156400a9d59886dd33902f96155012f",
-                "reference": "56e01f154156400a9d59886dd33902f96155012f",
+                "url": "https://api.github.com/repos/fkooman/php-cert-parser/zipball/d05eb0ab457dd152a5af69903e14ec52e0563e20",
+                "reference": "d05eb0ab457dd152a5af69903e14ec52e0563e20",
                 "shasum": ""
             },
             "require": {
@@ -27,7 +27,7 @@
             "type": "library",
             "autoload": {
                 "psr-0": {
-                    "fkooman\\X509": "src/"
+                    "fkooman\\X509\\": "src/"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -47,7 +47,7 @@
                 }
             ],
             "description": "Simple OpenSSL based X.509 certificate parser",
-            "time": "2015-06-03 10:21:12"
+            "time": "2015-06-26 19:58:51"
         },
         {
             "name": "fkooman/json",
@@ -92,12 +92,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/fkooman/php-lib-rest.git",
-                "reference": "077f270ae35052e81254bd2aa7638b0294946b6a"
+                "reference": "cd4b7e0a766ac205b60d060940ed83ff42749e97"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/fkooman/php-lib-rest/zipball/077f270ae35052e81254bd2aa7638b0294946b6a",
-                "reference": "077f270ae35052e81254bd2aa7638b0294946b6a",
+                "url": "https://api.github.com/repos/fkooman/php-lib-rest/zipball/cd4b7e0a766ac205b60d060940ed83ff42749e97",
+                "reference": "cd4b7e0a766ac205b60d060940ed83ff42749e97",
                 "shasum": ""
             },
             "require": {
@@ -131,14 +131,13 @@
                 }
             ],
             "description": "Simple PHP library for writing REST services.",
-            "time": "2015-06-21 10:12:38"
+            "time": "2015-06-26 09:03:58"
         }
     ],
     "packages-dev": [],
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
-        "fkooman/cert-parser": 20,
         "fkooman/rest": 20
     },
     "prefer-stable": false,
