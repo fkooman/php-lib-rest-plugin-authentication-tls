@@ -16,7 +16,7 @@
     "name": "fkooman/rest-plugin-tls",
     "require": {
         "fkooman/cert-parser": "~0.2.0",
-        "fkooman/rest": "dev-master",
+        "fkooman/rest": "~0.9.0",
         "php": ">=5.3.3"
     }
 }
