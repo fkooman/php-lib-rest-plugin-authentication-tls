@@ -47,16 +47,29 @@ class TlsAuthentication implements AuthenticationPluginInterface
 
     public function isAttempt(Request $request)
     {
-        $certData = $request->getHeader('SSL_CLIENT_CERT');
+        return false !== $this->getCertData($request);
+    }
 
-        return null !== $certData && 0 !== strlen($certData);
+    private function getCertData(Request $request)
+    {
+        // sometimes Apache/PHP uses SSL_CLIENT_CERT,
+        // sometimes REDIRECT_SSL_CLIENT_CERT, do not know exactly why...
+        $certKeys = array('SSL_CLIENT_CERT', 'REDIRECT_SSL_CLIENT_CERT');
+        foreach ($certKeys as $certKey) {
+            $certData = $request->getHeader($certKey);
+            if (null !== $certData && 0 !== strlen($certData)) {
+                return $certData;
+            }
+        }
+
+        return false;
     }
 
     public function execute(Request $request, array $routeConfig)
     {
         if ($this->isAttempt($request)) {
             try {
-                $certData = $request->getHeader('SSL_CLIENT_CERT');
+                $certData = $this->getCertData($request);
 
                 return new CertInfo(CertParser::fromPem($certData));
             } catch (Exception $e) {

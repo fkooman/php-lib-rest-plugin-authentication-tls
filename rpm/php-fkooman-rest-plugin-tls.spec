@@ -5,7 +5,7 @@
 %global github_name      php-lib-rest-plugin-tls
 
 Name:       php-%{composer_vendor}-%{composer_project}
-Version:    0.1.0
+Version:    0.1.1
 Release:    1%{?dist}
 Summary:    TLS Client Certificate Authentication plugin for fkooman/rest
 
@@ -43,5 +43,8 @@ cp -pr src/* ${RPM_BUILD_ROOT}%{_datadir}/php
 %doc README.md CHANGES.md COPYING composer.json
 
 %changelog
+* Mon Jun 29 2015 François Kooman <fkooman@tuxed.net> - 0.1.1-1
+- update to 0.1.1
+
 * Sun Jun 28 2015 François Kooman <fkooman@tuxed.net> - 0.1.0-1
 - initial package

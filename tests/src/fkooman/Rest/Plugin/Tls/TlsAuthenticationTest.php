@@ -62,6 +62,24 @@ T9sYz50XBzbpXbiWef2d0RMnCi6k+oiuBZBBz630kSU6jpi1a8iyavTT8jEA
         $this->assertEquals('__e3IYuUIKu_reNjy8ZHZ2PBh_H11eM5Rqs_KzxiHGg', $certInfo->getUserId());
     }
 
+    public function testTlsAuthCorrectRedirectSslClietCert()
+    {
+        $request = new Request(
+            array(
+                'SERVER_NAME' => 'www.example.org',
+                'SERVER_PORT' => 80,
+                'QUERY_STRING' => '',
+                'REQUEST_URI' => '/',
+                'SCRIPT_NAME' => '/index.php',
+                'REQUEST_METHOD' => 'GET',
+                'REDIRECT_SSL_CLIENT_CERT' => $this->certData,
+            )
+        );
+        $auth = new TlsAuthentication();
+        $certInfo = $auth->execute($request, array());
+        $this->assertEquals('__e3IYuUIKu_reNjy8ZHZ2PBh_H11eM5Rqs_KzxiHGg', $certInfo->getUserId());
+    }
+
     /**
      * @expectedException fkooman\Http\Exception\UnauthorizedException
      * @expectedExceptionMessage no_credentials
