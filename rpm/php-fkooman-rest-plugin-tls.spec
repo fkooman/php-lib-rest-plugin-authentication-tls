@@ -5,7 +5,7 @@
 %global github_name      php-lib-rest-plugin-tls
 
 Name:       php-%{composer_vendor}-%{composer_project}
-Version:    0.1.1
+Version:    0.1.2
 Release:    1%{?dist}
 Summary:    TLS Client Certificate Authentication plugin for fkooman/rest
 
@@ -17,12 +17,13 @@ BuildArch:  noarch
 
 Provides:   php-composer(%{composer_vendor}/%{composer_project}) = %{version}
 
-Requires:   php >= 5.3.3
-
+Requires:   php(language) >= 5.3.3
 Requires:   php-composer(fkooman/rest) >= 0.9.0
 Requires:   php-composer(fkooman/rest) < 0.10.0
-Requires:   php-composer(fkooman/cert-parser) >= 0.2.0
-Requires:   php-composer(fkooman/cert-parser) < 0.3.0
+Requires:   php-composer(fkooman/cert-parser) >= 1.0.0
+Requires:   php-composer(fkooman/cert-parser) < 2.0.0
+Requires:   php-composer(fkooman/base64) >= 1.0.0
+Requires:   php-composer(fkooman/base64) < 2.0.0
 
 %description
 Library written in PHP to make it easy to develop REST applications.
@@ -40,9 +41,13 @@ cp -pr src/* ${RPM_BUILD_ROOT}%{_datadir}/php
 %defattr(-,root,root,-)
 %dir %{_datadir}/php/%{composer_vendor}/Rest/Plugin/Tls
 %{_datadir}/php/%{composer_vendor}/Rest/Plugin/Tls/*
-%doc README.md CHANGES.md COPYING composer.json
+%doc README.md CHANGES.md composer.json
+%license COPYING
 
 %changelog
+* Wed Jul 08 2015 François Kooman <fkooman@tuxed.net> - 0.1.2-1
+- update to 0.1.2
+
 * Mon Jun 29 2015 François Kooman <fkooman@tuxed.net> - 0.1.1-1
 - update to 0.1.1
 

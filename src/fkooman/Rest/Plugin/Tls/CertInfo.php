@@ -20,6 +20,7 @@ namespace fkooman\Rest\Plugin\Tls;
 
 use fkooman\Rest\Plugin\Authentication\UserInfoInterface;
 use fkooman\X509\CertParser;
+use fkooman\Base64\Base64Url;
 
 class CertInfo implements UserInfoInterface
 {
@@ -33,6 +34,6 @@ class CertInfo implements UserInfoInterface
 
     public function getUserId()
     {
-        return $this->certParser->getFingerprint('sha256', true);
+        return Base64Url::encode($this->certParser->getFingerprint('sha256'));
     }
 }

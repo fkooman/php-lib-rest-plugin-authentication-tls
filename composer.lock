@@ -4,24 +4,60 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "4c41c101636329703ed08bc2d7a0c828",
+    "hash": "ba6e07324fb993d85ade64bb505747ef",
     "packages": [
         {
-            "name": "fkooman/cert-parser",
-            "version": "0.2.0",
+            "name": "fkooman/base64",
+            "version": "1.0.0",
             "source": {
                 "type": "git",
-                "url": "https://github.com/fkooman/php-cert-parser.git",
-                "reference": "d05eb0ab457dd152a5af69903e14ec52e0563e20"
+                "url": "https://github.com/fkooman/php-base64.git",
+                "reference": "48e0869cb05ad8eba6bbc205f31e4509910d038e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/fkooman/php-cert-parser/zipball/d05eb0ab457dd152a5af69903e14ec52e0563e20",
-                "reference": "d05eb0ab457dd152a5af69903e14ec52e0563e20",
+                "url": "https://api.github.com/repos/fkooman/php-base64/zipball/48e0869cb05ad8eba6bbc205f31e4509910d038e",
+                "reference": "48e0869cb05ad8eba6bbc205f31e4509910d038e",
+                "shasum": ""
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "fkooman\\Base64\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "Apache-2.0"
+            ],
+            "authors": [
+                {
+                    "name": "François Kooman",
+                    "email": "fkooman@tuxed.net"
+                }
+            ],
+            "description": "A base64 encoder and decoder",
+            "time": "2015-07-07 21:32:33"
+        },
+        {
+            "name": "fkooman/cert-parser",
+            "version": "1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/fkooman/php-cert-parser.git",
+                "reference": "c71d31af3b6295ef34100d0d4af86260cd8d94bf"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/fkooman/php-cert-parser/zipball/c71d31af3b6295ef34100d0d4af86260cd8d94bf",
+                "reference": "c71d31af3b6295ef34100d0d4af86260cd8d94bf",
                 "shasum": ""
             },
             "require": {
+                "ext-hash": "*",
                 "ext-openssl": "*",
+                "ext-pcre": "*",
+                "ext-spl": "*",
                 "php": ">=5.3.3"
             },
             "type": "library",
@@ -47,7 +83,7 @@
                 }
             ],
             "description": "Simple OpenSSL based X.509 certificate parser",
-            "time": "2015-06-26 19:58:51"
+            "time": "2015-07-08 10:37:35"
         },
         {
             "name": "fkooman/json",
