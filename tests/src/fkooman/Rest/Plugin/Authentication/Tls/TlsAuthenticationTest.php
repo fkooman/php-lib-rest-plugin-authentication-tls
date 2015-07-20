@@ -16,7 +16,7 @@
  * limitations under the License.
  */
 
-namespace fkooman\Rest\Plugin\Tls;
+namespace fkooman\Rest\Plugin\Authentication\Tls;
 
 use fkooman\Http\Request;
 use PHPUnit_Framework_TestCase;
@@ -160,7 +160,7 @@ T9sYz50XBzbpXbiWef2d0RMnCi6k+oiuBZBBz630kSU6jpi1a8iyavTT8jEA
             )
         );
         $auth = new TlsAuthentication();
-        $auth->execute($request, array('requireAuth' => false));
+        $auth->execute($request, array('require' => false));
     }
 
     public function testNotRequired()
@@ -177,6 +177,6 @@ T9sYz50XBzbpXbiWef2d0RMnCi6k+oiuBZBBz630kSU6jpi1a8iyavTT8jEA
             )
         );
         $auth = new TlsAuthentication();
-        $this->assertNull($auth->execute($request, array('requireAuth' => false)));
+        $this->assertNull($auth->execute($request, array('require' => false)));
     }
 }

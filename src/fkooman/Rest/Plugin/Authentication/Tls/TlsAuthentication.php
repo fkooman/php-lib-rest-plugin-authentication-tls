@@ -16,7 +16,7 @@
  * limitations under the License.
  */
 
-namespace fkooman\Rest\Plugin\Tls;
+namespace fkooman\Rest\Plugin\Authentication\Tls;
 
 use fkooman\X509\CertParser;
 use fkooman\Http\Request;
@@ -79,8 +79,8 @@ class TlsAuthentication implements AuthenticationPluginInterface
         }
 
         // no attempt
-        if (array_key_exists('requireAuth', $routeConfig)) {
-            if (!$routeConfig['requireAuth']) {
+        if (array_key_exists('require', $routeConfig)) {
+            if (!$routeConfig['require']) {
                 // no authentication required
                 return;
             }

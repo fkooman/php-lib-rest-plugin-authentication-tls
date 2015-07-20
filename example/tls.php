@@ -18,16 +18,13 @@
 require_once dirname(__DIR__).'/vendor/autoload.php';
 
 use fkooman\Rest\Service;
-use fkooman\Rest\PluginRegistry;
 use fkooman\Rest\Plugin\Tls\TlsAuthentication;
 use fkooman\Rest\Plugin\Tls\CertInfo;
 
 $service = new Service();
-$pluginRegistry = new PluginRegistry();
-$pluginRegistry->registerDefaultPlugin(
+$service->getPluginRegistry()->registerDefaultPlugin(
     new TlsAuthentication()
 );
-$service->setPluginRegistry($pluginRegistry);
 
 $service->get(
     '/getMyUserId',

@@ -1,11 +1,11 @@
 %global composer_vendor  fkooman
-%global composer_project rest-plugin-tls
+%global composer_project rest-plugin-authentication-tls
 
 %global github_owner     fkooman
-%global github_name      php-lib-rest-plugin-tls
+%global github_name      php-lib-rest-plugin-authentication-tls
 
 Name:       php-%{composer_vendor}-%{composer_project}
-Version:    0.1.2
+Version:    1.0.0
 Release:    1%{?dist}
 Summary:    TLS Client Certificate Authentication plugin for fkooman/rest
 
@@ -17,9 +17,11 @@ BuildArch:  noarch
 
 Provides:   php-composer(%{composer_vendor}/%{composer_project}) = %{version}
 
-Requires:   php(language) >= 5.3.3
-Requires:   php-composer(fkooman/rest) >= 0.9.0
-Requires:   php-composer(fkooman/rest) < 0.10.0
+Requires:   php(language) >= 5.4
+Requires:   php-composer(fkooman/rest) >= 1.0.0
+Requires:   php-composer(fkooman/rest) < 2.0.0
+Requires:   php-composer(fkooman/rest-plugin-authentication) >= 1.0.0
+Requires:   php-composer(fkooman/rest-plugin-authentication) < 2.0.0
 Requires:   php-composer(fkooman/cert-parser) >= 1.0.0
 Requires:   php-composer(fkooman/cert-parser) < 2.0.0
 Requires:   php-composer(fkooman/base64) >= 1.0.0
@@ -39,17 +41,11 @@ cp -pr src/* ${RPM_BUILD_ROOT}%{_datadir}/php
 
 %files
 %defattr(-,root,root,-)
-%dir %{_datadir}/php/%{composer_vendor}/Rest/Plugin/Tls
-%{_datadir}/php/%{composer_vendor}/Rest/Plugin/Tls/*
+%dir %{_datadir}/php/%{composer_vendor}/Rest/Plugin/Authentication/Tls
+%{_datadir}/php/%{composer_vendor}/Rest/Plugin/Authentication/Tls/*
 %doc README.md CHANGES.md composer.json
 %license COPYING
 
 %changelog
-* Wed Jul 08 2015 François Kooman <fkooman@tuxed.net> - 0.1.2-1
-- update to 0.1.2
-
-* Mon Jun 29 2015 François Kooman <fkooman@tuxed.net> - 0.1.1-1
-- update to 0.1.1
-
-* Sun Jun 28 2015 François Kooman <fkooman@tuxed.net> - 0.1.0-1
-- initial package
+* Mon Jul 20 2015 François Kooman <fkooman@tuxed.net> - 1.0.0-1
+- update to 1.0.0

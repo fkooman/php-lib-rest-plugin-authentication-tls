@@ -16,7 +16,7 @@
  * limitations under the License.
  */
 
-namespace fkooman\Rest\Plugin\Tls;
+namespace fkooman\Rest\Plugin\Authentication\Tls;
 
 use fkooman\Rest\Plugin\Authentication\UserInfoInterface;
 use fkooman\X509\CertParser;

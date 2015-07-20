@@ -1,5 +1,8 @@
 # Release History
 
+## 1.0.0
+- update `fkooman/rest` and use `fkooman/rest-plugin-authentication`
+
 ## 0.1.2
 - update `fkooman/cert-parser`
 

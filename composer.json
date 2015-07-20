@@ -8,16 +8,17 @@
     ],
     "autoload": {
         "psr-0": {
-            "fkooman\\Rest\\Plugin\\Tls\\": "src/"
+            "fkooman\\Rest\\Plugin\\Authentication\\Tls\\": "src/"
         }
     },
     "description": "TLS Client Certificate Authentication plugin for fkooman/rest",
     "license": "Apache-2.0",
-    "name": "fkooman/rest-plugin-tls",
+    "name": "fkooman/rest-plugin-authentication-tls",
     "require": {
-        "fkooman/base64": "~1.0.0",
-        "fkooman/cert-parser": "~1.0.0",
-        "fkooman/rest": "~0.9.0",
-        "php": ">=5.3.3"
+        "fkooman/base64": "^1.0.0",
+        "fkooman/cert-parser": "^1.0.0",
+        "fkooman/rest": "^1.0.0",
+        "fkooman/rest-plugin-authentication": "^1.0.0",
+        "php": ">=5.4"
     }
 }
