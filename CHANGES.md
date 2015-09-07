@@ -1,5 +1,8 @@
 # Release History
 
+## 1.0.1 (2015-09-07)
+- remove `fkooman/cert-parser` dependency
+
 ## 1.0.0
 - update `fkooman/rest` and use `fkooman/rest-plugin-authentication`
 
