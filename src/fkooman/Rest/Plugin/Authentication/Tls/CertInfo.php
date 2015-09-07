@@ -15,25 +15,25 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 namespace fkooman\Rest\Plugin\Authentication\Tls;
 
 use fkooman\Rest\Plugin\Authentication\UserInfoInterface;
-use fkooman\X509\CertParser;
 use fkooman\Base64\Base64Url;
 
 class CertInfo implements UserInfoInterface
 {
-    /** @var \fkooman\X509\CertParser */
-    private $certParser;
+    /** @var string */
+    private $derString;
 
-    public function __construct(CertParser $certParser)
+    public function __construct($derString)
     {
-        $this->certParser = $certParser;
+        $this->derString = $derString;
     }
 
     public function getUserId()
     {
-        return Base64Url::encode($this->certParser->getFingerprint('sha256'));
+        return Base64Url::encode(
+            hash('sha256', $this->derString, true)
+        );
     }
 }

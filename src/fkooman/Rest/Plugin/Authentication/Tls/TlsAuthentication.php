@@ -15,15 +15,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 namespace fkooman\Rest\Plugin\Authentication\Tls;
 
-use fkooman\X509\CertParser;
 use fkooman\Http\Request;
 use fkooman\Rest\Plugin\Authentication\AuthenticationPluginInterface;
 use fkooman\Http\Exception\UnauthorizedException;
 use fkooman\Http\Exception\BadRequestException;
-use Exception;
+use fkooman\Base64\Base64;
+use InvalidArgumentException;
 
 class TlsAuthentication implements AuthenticationPluginInterface
 {
@@ -68,14 +67,14 @@ class TlsAuthentication implements AuthenticationPluginInterface
     public function execute(Request $request, array $routeConfig)
     {
         if ($this->isAttempt($request)) {
-            try {
-                $certData = $this->getCertData($request);
+            $certData = $this->getCertData($request);
 
-                return new CertInfo(CertParser::fromPem($certData));
-            } catch (Exception $e) {
-                // something went wrong with parsing the certificate...
-                throw new BadRequestException($e->getMessage());
+            $derString = self::pemToDer($certData);
+            if (false === $derString) {
+                throw new BadRequestException('invalid certificate');
             }
+
+            return new CertInfo($derString);
         }
 
         // no attempt
@@ -93,5 +92,29 @@ class TlsAuthentication implements AuthenticationPluginInterface
         );
         $e->addScheme('TLS', $this->authParams);
         throw $e;
+    }
+
+    private function pemToDer($certData)
+    {
+        $encodedString = preg_replace(
+            '/.*-----BEGIN CERTIFICATE-----(.*)-----END CERTIFICATE-----.*/msU',
+            '${1}',
+            $certData
+        );
+
+        if (!is_string($encodedString)) {
+            return false;
+        }
+        $encodedString = str_replace(
+            array(' ', "\t", "\n", "\r", "\0", "\x0B"),
+            '',
+            $encodedString
+        );
+
+        try {
+            return Base64::decode($encodedString);
+        } catch (InvalidArgumentException $e) {
+            return false;
+        }
     }
 }

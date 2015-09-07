@@ -15,7 +15,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 namespace fkooman\Rest\Plugin\Authentication\Tls;
 
 use fkooman\Http\Request;
@@ -123,7 +122,7 @@ T9sYz50XBzbpXbiWef2d0RMnCi6k+oiuBZBBz630kSU6jpi1a8iyavTT8jEA
 
     /**
      * @expectedException fkooman\Http\Exception\BadRequestException
-     * @expectedExceptionMessage OpenSSL was unable to parse the certificate
+     * @expectedExceptionMessage invalid certificate
      */
     public function testTlsAuthBrokenCert()
     {
@@ -144,7 +143,7 @@ T9sYz50XBzbpXbiWef2d0RMnCi6k+oiuBZBBz630kSU6jpi1a8iyavTT8jEA
 
     /**
      * @expectedException fkooman\Http\Exception\BadRequestException
-     * @expectedExceptionMessage OpenSSL was unable to parse the certificate
+     * @expectedExceptionMessage invalid certificate
      */
     public function testAttemptWhileNotRequired()
     {
