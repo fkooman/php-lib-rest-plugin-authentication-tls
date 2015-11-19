@@ -18,6 +18,7 @@
 namespace fkooman\Rest\Plugin\Authentication\Tls;
 
 use fkooman\Http\Request;
+use fkooman\Rest\Service;
 use fkooman\Rest\Plugin\Authentication\AuthenticationPluginInterface;
 use fkooman\Http\Exception\UnauthorizedException;
 use fkooman\Http\Exception\BadRequestException;
@@ -34,22 +35,41 @@ class TlsAuthentication implements AuthenticationPluginInterface
         $this->authParams = $authParams;
     }
 
-    public function getScheme()
+    public function init(Service $service)
     {
-        return 'TLS';
+        // NOP
     }
 
-    public function getAuthParams()
+    public function isAuthenticated(Request $request)
     {
-        return $this->authParams;
+        $certData = self::getCertData($request);
+        if (false === $certData) {
+            return false;
+        }
+
+        $derString = self::pemToDer($certData);
+        if (false === $derString) {
+            throw new BadRequestException('invalid certificate');
+        }
+
+        return new CertInfo($derString);
     }
 
-    public function isAttempt(Request $request)
+    public function requestAuthentication(Request $request)
     {
-        return false !== $this->getCertData($request);
+        // if we reach here, authentication failed and can't be fixed, no
+        // matter what. Possibly the user cancelled the certificate popup, or
+        // has no certificate...
+        $e = new UnauthorizedException(
+            'no_certificate',
+            'TLS client certificate missing in request'
+        );
+        $e->addScheme('TLS', $this->authParams);
+
+        throw $e;
     }
 
-    private function getCertData(Request $request)
+    private static function getCertData(Request $request)
     {
         // sometimes Apache/PHP uses SSL_CLIENT_CERT,
         // sometimes REDIRECT_SSL_CLIENT_CERT, do not know exactly why...
@@ -64,37 +84,7 @@ class TlsAuthentication implements AuthenticationPluginInterface
         return false;
     }
 
-    public function execute(Request $request, array $routeConfig)
-    {
-        if ($this->isAttempt($request)) {
-            $certData = $this->getCertData($request);
-
-            $derString = self::pemToDer($certData);
-            if (false === $derString) {
-                throw new BadRequestException('invalid certificate');
-            }
-
-            return new CertInfo($derString);
-        }
-
-        // no attempt
-        if (array_key_exists('require', $routeConfig)) {
-            if (!$routeConfig['require']) {
-                // no authentication required
-                return;
-            }
-        }
-
-        // no attempt, but authentication required
-        $e = new UnauthorizedException(
-            'no_credentials',
-            'TLS client certificate missing in request'
-        );
-        $e->addScheme('TLS', $this->authParams);
-        throw $e;
-    }
-
-    private function pemToDer($certData)
+    private static function pemToDer($certData)
     {
         $encodedString = preg_replace(
             '/.*-----BEGIN CERTIFICATE-----(.*)-----END CERTIFICATE-----.*/msU',
